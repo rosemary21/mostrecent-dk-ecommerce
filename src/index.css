@@ -1,0 +1,48 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  text-decoration: none !important;
+  overflow-x: hidden;
+  box-sizing: border-box !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pink: #e80e0f;
+  --white: #fff;
+  --black: #000;
+  --blue-text: #101828;
+  --border-color-light: #e4e4e7;
+  --muted-dark: #727171;
+  --muted-light: #aeaeb1;
+  --transition: 400ms ease;
+  --font-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-archivo: "Archivo", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth !important;
+  scroll-padding: 70px 0;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--white);
+  color: var(--black);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+  appearance: none;
+}
