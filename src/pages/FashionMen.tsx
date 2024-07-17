@@ -1,3 +1,9 @@
+import FashionMain from "../components/fashion/FashionMain";
+
 export default function FashionMen() {
-  return <div>Fashion</div>;
+  return (
+    <div>
+      <FashionMain />
+    </div>
+  );
 }

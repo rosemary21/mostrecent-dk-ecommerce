@@ -6,9 +6,7 @@ export default {
       backgroundImage: {
         homeBg: "url('/assets/home-main-bg.jpg')",
         featuresLeft: "url('/assets/features-bg-left.png')",
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        fashionBg: "url('/assets/fashion-bg.png')",
       },
       colors: {
         primary: "#E80E0F",

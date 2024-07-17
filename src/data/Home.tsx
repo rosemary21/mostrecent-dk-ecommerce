@@ -18,18 +18,24 @@ export const homeNavs = [
   },
   {
     id: 3,
-    link: ROUTES.artCraft,
+    link: ROUTES.software,
     text: "Software",
-    path: "art-craft",
+    path: "software",
   },
   {
     id: 4,
+    link: ROUTES.artCraft,
+    text: "Art & Craft",
+    path: "art-craft",
+  },
+  {
+    id: 5,
     link: ROUTES.aboutUs,
     text: "About",
     path: "about",
   },
   {
-    id: 5,
+    id: 6,
     link: ROUTES.contactUs,
     text: "Contact Us",
     path: "contact-us",
@@ -92,61 +98,6 @@ export const testimonials = [
       "We love Dkeralutive! Our designers were using it for their projects, so clients already knew what Dkeralutive was and how to use it.",
     name: "Philip Louis",
     position: "Head of Arts and Crafts",
-  },
-];
-
-export const sliders = [
-  {
-    id: 1,
-    imageUrl: "/assets/slide-1.png",
-  },
-  {
-    id: 2,
-    imageUrl: "/assets/slide-2.png",
-  },
-  {
-    id: 3,
-    imageUrl: "/assets/slide-3.png",
-  },
-  {
-    id: 4,
-    imageUrl: "/assets/slide-4.png",
-  },
-  {
-    id: 5,
-    imageUrl: "/assets/slide-5.png",
-  },
-  {
-    id: 6,
-    imageUrl: "/assets/slide-6.png",
-  },
-  {
-    id: 7,
-    imageUrl: "/assets/slide-7.png",
-  },
-  {
-    id: 8,
-    imageUrl: "/assets/slide-8.png",
-  },
-  {
-    id: 9,
-    imageUrl: "/assets/slide-9.png",
-  },
-  {
-    id: 10,
-    imageUrl: "/assets/slide-10.png",
-  },
-  {
-    id: 11,
-    imageUrl: "/assets/slide-11.png",
-  },
-  {
-    id: 12,
-    imageUrl: "/assets/slide-12.png",
-  },
-  {
-    id: 13,
-    imageUrl: "/assets/slide-13.png",
   },
 ];
 
