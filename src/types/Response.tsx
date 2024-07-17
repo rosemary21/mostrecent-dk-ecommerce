@@ -8,3 +8,7 @@ export type LoginResponseProps = {
   token: string;
   emailAddress: string;
 };
+
+export type NewsletterResponse = {
+  responseDto: ResponseDto;
+};

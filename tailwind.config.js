@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        homeBg: "url('/home-main-bg.jpg')",
-        featuresLeft: "url('/features-bg-left.png')",
+        homeBg: "url('/assets/home-main-bg.jpg')",
+        featuresLeft: "url('/assets/features-bg-left.png')",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",

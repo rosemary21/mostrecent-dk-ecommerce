@@ -2,12 +2,13 @@ import { toast } from "react-toastify";
 
 export default function openNotification(
   status: "error" | "success" | "warning",
-  message: string
+  message: string,
+  duration?: number
 ) {
   if (status === "success") {
     toast.success(message, {
       position: "top-right",
-      autoClose: 2000,
+      autoClose: duration || 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -18,7 +19,7 @@ export default function openNotification(
   } else if (status === "error") {
     toast.error(message, {
       position: "top-right",
-      autoClose: 4000,
+      autoClose: duration || 4000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -29,7 +30,7 @@ export default function openNotification(
   } else {
     toast.warn(message, {
       position: "top-right",
-      autoClose: 3000,
+      autoClose: duration || 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
