@@ -67,3 +67,8 @@ export type SignUpResponse = {
   userDto: any;
   userDtoList: any;
 };
+
+export type LogOutResponse = {
+  resp: ResponseDto;
+  firstTimeLogin: boolean;
+};

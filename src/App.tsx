@@ -19,8 +19,50 @@ import Profile from "./pages/Profile";
 import Software from "./pages/Software";
 import WallPainting from "./pages/WallPainting";
 import HandCrafted from "./pages/HandCrafted";
+import { useIdleTimer } from "react-idle-timer";
+import { logOut } from "./services/api/API";
+import openNotification from "./utils/OpenNotification";
 
 function App() {
+  const onIdle = async () => {
+    await logOut();
+    openNotification(
+      "success",
+      "User has been inactive for more than 5 minutes."
+    );
+  };
+
+  useIdleTimer({
+    onIdle,
+    timeout: 1000 * 60 * 5,
+    promptTimeout: 0,
+    startOnMount: true,
+    stopOnIdle: false,
+    crossTab: false,
+    syncTimers: 0,
+    events: [
+      "DOMMouseScroll",
+      "beforeunload",
+      "change",
+      "click",
+      "copy",
+      "cut",
+      "dblclick",
+      "drag",
+      "drop",
+      "focus",
+      "gotpointercapture",
+      "volumechange",
+      "wheel",
+      "resize",
+      "mousemove",
+      "keydown",
+      "mousewheel",
+      "mousedown",
+      "mouseover",
+      "play",
+    ],
+  });
   return (
     <BrowserRouter>
       <Router>

@@ -1,3 +1,4 @@
+[✅] Add auto logout after 5 mins of inactivity
 [] Remove all VAT until we get the response from BE
 [] Display a modal for the VAT and charge
 [] Initialise card and tokenize

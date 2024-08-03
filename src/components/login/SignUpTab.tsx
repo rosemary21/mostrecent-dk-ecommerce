@@ -164,7 +164,9 @@ export default function SignUpTab({ setTab }: Props) {
                 {type2 === "password" ? "SHOW" : "HIDE"}
               </span>
             </div>
-            {errors.password && <InputError errorMessage={errors.password} />}
+            {errors.confirmPassword && (
+              <InputError errorMessage={errors.confirmPassword} />
+            )}
           </div>
 
           <button

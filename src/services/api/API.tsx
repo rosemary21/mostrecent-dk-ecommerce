@@ -10,6 +10,7 @@ import {
   ContactUsResponse,
   GetProductDescriptionResponse,
   LoginResponseProps,
+  LogOutResponse,
   NewsletterResponse,
   SignUpResponse,
 } from "../../types/Response";
@@ -94,6 +95,24 @@ export const signUp = async (payload: SignUpPayload) => {
   } catch (error) {
     const data = catchError<SignUpResponse>(error);
     openNotification("error", data?.responseDto?.message);
+    return;
+  }
+};
+
+export const logOut = async () => {
+  try {
+    const url = `logout`;
+    const { data } = await axiosInstance.get<LogOutResponse>(url);
+    if (data?.resp?.code === dkSuccess) {
+      openNotification("success", data?.resp?.message);
+      window.location.href = "/";
+      localStorage.clear();
+      sessionStorage.clear();
+      return data;
+    }
+  } catch (error) {
+    const data = catchError<LogOutResponse>(error);
+    openNotification("error", data?.resp?.message);
     return;
   }
 };
