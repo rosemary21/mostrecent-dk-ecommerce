@@ -7,14 +7,17 @@ import { Drawer, Tooltip } from "antd";
 import isMobile from "../../utils/isMobile";
 import { fashionNavs } from "../../data";
 import { ROUTES } from "../../routes";
+import { useCartContext } from "../../contexts/CartContext";
 
 export default function FashionNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = useLocation().pathname.split("/")[1];
 
+  const { cartCount, cartControls } = useCartContext();
+
   return (
     <>
-      <nav className="w-full h-[10vh] fixed top-0 left-0 z-20 shadow-md flex items-center justify-between lg:px-[60px] md:px-[45px] px-[20px] overflow-hidden bg-white">
+      <nav className="w-screen h-[10vh] fixed top-0 left-0 z-[500] shadow-md flex items-center justify-between lg:px-[60px] md:px-[45px] px-[20px] overflow-hidden bg-white">
         <motion.div
           animate={{ opacity: [0, 1], x: ["-100%", "30%", "0"] }}
           transition={{ duration: 0.8, ease: "circInOut" }}
@@ -33,6 +36,7 @@ export default function FashionNavbar() {
             <motion.div
               animate={{ opacity: [0, 1], x: ["100%", "-30%", "0"] }}
               transition={{ duration: 0.8, delay: Number(`0.${id}`) }}
+              key={id}
             >
               <Link
                 to={`/${link}`}
@@ -75,9 +79,18 @@ export default function FashionNavbar() {
               className="cursor-pointer w-[19px] h-[20px]"
               title="Cart"
             />
-            <span className="absolute -top-[10px] -right-[12px] w-[22px] h-[22px] bg-[#5754FF] rounded-full font-medium text-center text-[13px] text-white grid place-content-center">
-              2
-            </span>
+            <motion.span
+              animate={cartControls}
+              initial={{
+                backgroundColor: "#5754FF",
+                scale: 1,
+                shadow: "4px 7px 7px rgb(173 59 246 / 50%)",
+              }}
+              transition={{ duration: 1, ease: "backInOut" }}
+              className="absolute -top-[10px] -right-[12px] w-[22px] h-[22px] bg-[#5754FF] rounded-full font-medium text-center text-[13px] text-white grid place-content-center"
+            >
+              {cartCount()}
+            </motion.span>
           </Link>
         </div>
 
@@ -101,6 +114,7 @@ export default function FashionNavbar() {
             <motion.div
               animate={{ opacity: [0, 1], x: ["100%", "-30%", "0"] }}
               transition={{ duration: 0.8, delay: Number(`0.${id}`) }}
+              key={id}
             >
               <Link
                 to={`/${link}`}

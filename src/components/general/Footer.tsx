@@ -6,7 +6,7 @@ import { ROUTES } from "../../routes";
 import { NewsletterPayload } from "../../types/Payload";
 import { suscribeToNewsletter } from "../../services/api/API";
 import { useState } from "react";
-import { dkSuccess } from "../../data";
+import { dkSuccess, ERRORS } from "../../data";
 import Newsletter from "../modals/Newsletter";
 
 export default function Footer() {
@@ -27,9 +27,7 @@ export default function Footer() {
         email: "",
       },
       validationSchema: object().shape({
-        email: string()
-          .email("This field must be a valid email")
-          .required("Email is required"),
+        email: string().email(ERRORS.email).required(ERRORS.required),
       }),
       onSubmit: async ({ email }, { resetForm, setSubmitting }) => {
         const payload: NewsletterPayload = {
@@ -67,25 +65,25 @@ export default function Footer() {
               Company
             </h4>
             <Link
-              to={ROUTES.aboutUs}
+              to={`/${ROUTES.aboutUs}`}
               className="md:text-[17px] text-[15px] font-poppins font-medium"
             >
               About
             </Link>
             <Link
-              to={ROUTES.fashionMen}
+              to={`/${ROUTES.fashionMen}`}
               className="md:text-[17px] text-[15px] font-poppins font-medium"
             >
               Fashion
             </Link>
             <Link
-              to={ROUTES.artCraft}
+              to={`/${ROUTES.artCraft}`}
               className="md:text-[17px] text-[15px] font-poppins font-medium"
             >
               Art & Craft
             </Link>
             <Link
-              to={ROUTES.CaseStudy}
+              to={`/${ROUTES.CaseStudy}`}
               className="md:text-[17px] text-[15px] font-poppins font-medium"
             >
               Dk Sort
@@ -97,25 +95,25 @@ export default function Footer() {
               HELP
             </h4>
             <Link
-              to={ROUTES.contactUs}
+              to={`/${ROUTES.contactUs}`}
               className="md:text-[17px] text-[15px] font-poppins font-medium"
             >
               Contact Us
             </Link>
             <Link
-              to={ROUTES.login}
+              to={`/${ROUTES.login}`}
               className="md:text-[17px] text-[15px] text-primary font-poppins font-medium"
             >
               Login
             </Link>
             <Link
-              to={ROUTES.terms}
+              to={`/${ROUTES.terms}`}
               className="md:text-[17px] text-[15px] font-poppins font-medium"
             >
               Terms & Conditions
             </Link>
             <Link
-              to={ROUTES.privacy}
+              to={`/${ROUTES.privacy}`}
               className="md:text-[17px] text-[15px] font-poppins font-medium"
             >
               Privacy Policy

@@ -7,9 +7,13 @@ export default {
         homeBg: "url('/assets/home-main-bg.jpg')",
         featuresLeft: "url('/assets/features-bg-left.png')",
         fashionBg: "url('/assets/fashion-bg.png')",
+        artCraftBg: "url('/assets/art-craft-bg.png')",
+        artCraftCat1: "url('/assets/art-cat-1.png')",
+        artCraftCat2: "url('/assets/art-cat-2.png')",
       },
       colors: {
         primary: "#E80E0F",
+        muted: "#888",
       },
       fontFamily: {
         inter: ["var(--font-inter)"],

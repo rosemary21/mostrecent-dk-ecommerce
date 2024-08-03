@@ -19,15 +19,9 @@ export default function SoftwareAds() {
           <MobileAppDownloadLink />
         </motion.div>
 
-        <div className="flex items-start gap-5 justify-between py-4 px-2">
+        <div className="flex md:flex-row flex-col items-start gap-5 justify-between py-4 px-2">
           {contents.map(({ date, id, imageUrl, title }) => (
-            <motion.div
-              initial={{ opacity: 0, x: "100%" }}
-              whileInView={{ opacity: 1, x: "0" }}
-              transition={{ duration: 1, delay: Number(`0.${id + 1}`) }}
-              viewport={{ margin: "35px", once: true }}
-              className="bg-white h-[360px] md:w-[300px] w-full rounded-[15px] transition-all duration-500 hover:shadow-lg shadow-sm"
-            >
+            <div className="bg-white h-[360px] md:w-[300px] w-full rounded-[15px] transition-all duration-500 hover:shadow-lg shadow-sm">
               <div className="w-full h-1/2 rounded-t-[15px] overflow-hidden">
                 <img
                   src={imageUrl}
@@ -43,7 +37,7 @@ export default function SoftwareAds() {
                   {date}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

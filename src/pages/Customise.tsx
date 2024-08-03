@@ -1,6 +1,3 @@
-
 export default function Customise() {
-  return (
-    <div>Customise</div>
-  )
+  return <div>Customise</div>;
 }

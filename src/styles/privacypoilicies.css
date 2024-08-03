@@ -1,0 +1,23 @@
+h3 {
+  font-size: 16px;
+  font-family: var(--font-jakarta);
+  font-weight: 700;
+}
+p {
+  font-size: 14px;
+  font-family: var(--font-jakarta);
+  font-weight: 400;
+}
+ul {
+  list-style: disc !important;
+  li {
+    font-size: 14px;
+    font-family: var(--font-jakarta);
+    font-weight: 400;
+  }
+}
+h5 {
+  font-size: 14px;
+  font-family: var(--font-jakarta);
+  font-weight: 500;
+}

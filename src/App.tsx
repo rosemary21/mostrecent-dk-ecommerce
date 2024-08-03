@@ -9,14 +9,16 @@ import ArtCraft from "./pages/ArtCraft";
 import CaseStudy from "./pages/CaseStudy";
 import Checkout from "./pages/Checkout";
 import { ROUTES } from "./routes";
-import Customise from "./pages/Customise";
+// import Customise from "./pages/Customise";
 import Login from "./pages/Login";
 import PrivacyPolicies from "./pages/PrivacyPolicies";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ContactUs from "./pages/ContactUs";
-import Details from "./pages/Details";
 import FashionKids from "./pages/FashionKids";
 import Profile from "./pages/Profile";
+import Software from "./pages/Software";
+import WallPainting from "./pages/WallPainting";
+import HandCrafted from "./pages/HandCrafted";
 
 function App() {
   return (
@@ -31,15 +33,17 @@ function App() {
           <Route path={ROUTES.aboutUs} element={<About />} />
           <Route path={ROUTES.allBrands} element={<AllBrands />} />
           <Route path={ROUTES.artCraft} element={<ArtCraft />} />
+          <Route path={ROUTES.software} element={<Software />} />
           <Route path={ROUTES.CaseStudy} element={<CaseStudy />} />
           <Route path={ROUTES.checkout} element={<Checkout />} />
-          <Route path={ROUTES.customise} element={<Customise />} />
+          {/* <Route path={ROUTES.customise} element={<Customise />} /> */}
           <Route path={ROUTES.login} element={<Login />} />
           <Route path={ROUTES.privacy} element={<PrivacyPolicies />} />
           <Route path={ROUTES.terms} element={<TermsAndConditions />} />
           <Route path={ROUTES.contactUs} element={<ContactUs />} />
-          <Route path={ROUTES.details} element={<Details />} />
           <Route path={ROUTES.profile} element={<Profile />} />
+          <Route path={ROUTES.wallPainting} element={<WallPainting />} />
+          <Route path={ROUTES.handCrafted} element={<HandCrafted />} />
         </Route>
       </Router>
     </BrowserRouter>

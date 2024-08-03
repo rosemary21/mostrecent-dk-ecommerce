@@ -1,6 +1,5 @@
-
 export const ROUTES = {
-  home: "",
+  home: "/",
   fashionMen: "fashion-men",
   fashionWomen: "fashion-women",
   fashionKids: "fashion-kids",
@@ -9,7 +8,7 @@ export const ROUTES = {
   contactUs: "contact-us",
   artCraft: "art-craft",
   software: "software",
-  checkout: "check-out",
+  checkout: "checkout",
   customise: "customise",
   cart: "cart",
   CaseStudy: "case-study",
@@ -17,5 +16,7 @@ export const ROUTES = {
   privacy: "privacy-policies",
   terms: "terms-conditions",
   login: "login",
-  profile: "profile"
+  profile: "profile",
+  wallPainting: "wall-painting",
+  handCrafted: "hand-crafted",
 };

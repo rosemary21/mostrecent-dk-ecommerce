@@ -1,3 +1,11 @@
+import CaseStudyMain from "../components/caseStudy/CaseStudyMain";
+import Footer from "../components/general/Footer";
+
 export default function CaseStudy() {
-  return <div>CaseStudy</div>;
+  return (
+    <>
+      <CaseStudyMain />
+      <Footer />
+    </>
+  );
 }

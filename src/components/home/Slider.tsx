@@ -32,15 +32,13 @@ export default function AdSlider() {
       additionalTransfrom={0}
       arrows
       autoPlay
-      autoPlaySpeed={3000}
+      autoPlaySpeed={2000}
       centerMode={false}
       className="h-[240px] w-screen"
       containerClass="container-with-dots"
-      dotListClass=""
       draggable
       focusOnSelect={false}
       infinite
-      itemClass=""
       keyBoardControl
       minimumTouchDrag={80}
       pauseOnHover
@@ -54,19 +52,9 @@ export default function AdSlider() {
       rtl={false}
       shouldResetAutoplay
       showDots={false}
-      sliderClass=""
       slidesToSlide={1}
       swipeable
     >
-      {/* {sliders.map(({ id, imageUrl }) => (
-        <img
-          key={id}
-          src={imageUrl}
-          alt={`slide ${id}`}
-          className="h-[240px] w-full object-cover"
-        />
-      ))} */}
-
       <img
         src="/assets/slide-1.png"
         alt="slider-1"

@@ -36,6 +36,7 @@ export default function openNotification(
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      style: { color: "black" },
       theme: "colored",
     });
   }

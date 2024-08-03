@@ -1,0 +1,139 @@
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, ReactNode, useContext, useState } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
+import { AnimationControls, useAnimationControls } from "framer-motion";
+import { getLocalData } from "../utils/localData";
+import { ProductDescription } from "../types/Response";
+
+export interface CartProps {
+  id: number | string;
+  count: number;
+}
+
+interface ContextProps {
+  addToCart: (id: number) => void;
+  removeItemFromCart: (id: number) => void;
+  removeFromCart: (id: number) => void;
+  clearCart: () => void;
+  cartCount: () => number;
+  cartControls: AnimationControls;
+  handleAnimateCart: () => void;
+  fashionItems: ProductDescription[];
+  artItems: ProductDescription[];
+  allBrandItems: () => void;
+  cart: CartProps[];
+  setCart: React.Dispatch<React.SetStateAction<CartProps[]>>;
+}
+
+const Context = createContext({} as ContextProps);
+
+export function useCartContext() {
+  return useContext(Context);
+}
+
+export default function CartContextProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const [cart, setCart] = useLocalStorage<CartProps[]>("cart", []);
+  const cartControls = useAnimationControls();
+
+  const [fashionItems, setFashionItems] = useState<ProductDescription[]>([]);
+  const [artItems, setArtItems] = useState<ProductDescription[]>([]);
+
+  const cartCount = () => {
+    return cart.reduce((qty, item) => qty + item.count, 0);
+  };
+
+  const handleAnimateCart = () => {
+    cartControls.start({
+      backgroundColor: [
+        "#1e293b",
+        "#1f2937",
+        "#18181b",
+        "#b91c1c",
+        "#9a3412",
+        "#3f6212",
+        "#065f46",
+        "#155e75",
+        "#5754FF",
+      ],
+      scale: [1.22, 1.3, 1.1, 1],
+      shadow: ["2px 2px 2px #5754FF", "4px 7px 7px #5754FF"],
+    });
+  };
+
+  const addToCart = (id: number) => {
+    setCart((currItems) => {
+      if (currItems?.find((item) => item.id === id) == null) {
+        return [...currItems, { id, count: 1 }];
+      } else {
+        return currItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, count: item.count + 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  };
+
+  const removeFromCart = (id: number) => {
+    setCart((currItems) => {
+      if (currItems?.find((item) => item.id === id)?.count == 1) {
+        return currItems.filter((item) => item.id !== id);
+      } else {
+        return currItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, count: item.count - 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  };
+
+  const removeItemFromCart = (id: number) => {
+    setCart((currItems) => {
+      return currItems.filter((item) => item.id !== id);
+    });
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const allBrandItems = () => {
+    const fashionItems = getLocalData<ProductDescription[] | undefined>(
+      "fashion-products"
+    );
+    const artItems = getLocalData<ProductDescription[] | undefined>(
+      "artCraft-products"
+    );
+
+    if (!fashionItems) return;
+    if (!artItems) return;
+
+    setFashionItems(fashionItems);
+    setArtItems(artItems);
+  };
+
+  const values = {
+    cartCount,
+    addToCart,
+    removeItemFromCart,
+    clearCart,
+    cartControls,
+    handleAnimateCart,
+    removeFromCart,
+    fashionItems,
+    artItems,
+    cart,
+    setCart,
+    allBrandItems,
+  };
+  return <Context.Provider value={values}>{children}</Context.Provider>;
+}
