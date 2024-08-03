@@ -1,9 +1,16 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { AnimationControls, useAnimationControls } from "framer-motion";
 import { getLocalData } from "../utils/localData";
-import { ProductDescription } from "../types/Response";
+import { LoginResponseProps, ProductDescription } from "../types/Response";
+import { ActiveCheckoutAccordion } from "../pages/Checkout";
 
 export interface CartProps {
   id: number | string;
@@ -33,6 +40,12 @@ interface ContextProps {
   setCart: React.Dispatch<React.SetStateAction<CartProps[]>>;
   formValues: DeliveryFormValues;
   setFormValues: React.Dispatch<React.SetStateAction<DeliveryFormValues>>;
+  activeCheckoutAccordion: ActiveCheckoutAccordion;
+  setActiveCheckoutAccordion: React.Dispatch<
+    React.SetStateAction<ActiveCheckoutAccordion>
+  >;
+  user: LoginResponseProps | null;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Context = createContext({} as ContextProps);
@@ -47,6 +60,7 @@ export default function CartContextProvider({
   children: ReactNode;
 }) {
   const [cart, setCart] = useLocalStorage<CartProps[]>("cart", []);
+  const [user, setUser] = useState<LoginResponseProps | null>(null);
   const cartControls = useAnimationControls();
 
   const [fashionItems, setFashionItems] = useState<ProductDescription[]>([]);
@@ -61,6 +75,12 @@ export default function CartContextProvider({
       lga: "",
     }
   );
+  const [activeCheckoutAccordion, setActiveCheckoutAccordion] =
+    useLocalStorage<ActiveCheckoutAccordion>(
+      "activeCheckoutAccordion",
+      "Sign In"
+    );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const cartCount = () => {
     return cart.reduce((qty, item) => qty + item.count, 0);
@@ -141,6 +161,12 @@ export default function CartContextProvider({
     setArtItems(artItems);
   };
 
+  useEffect(() => {
+    const userData = getLocalData<LoginResponseProps>("user-details");
+    if (!userData) return;
+    setUser(userData);
+  }, [isLoggedIn]);
+
   const values = {
     cartCount,
     addToCart,
@@ -156,6 +182,10 @@ export default function CartContextProvider({
     allBrandItems,
     formValues,
     setFormValues,
+    activeCheckoutAccordion,
+    setActiveCheckoutAccordion,
+    user,
+    setIsLoggedIn,
   };
   return <Context.Provider value={values}>{children}</Context.Provider>;
 }

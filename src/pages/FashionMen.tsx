@@ -8,6 +8,7 @@ import FashionSales from "../components/fashion/FashionSales";
 import { setLocalData } from "../utils/localData";
 import { ProductDescription } from "../types/Response";
 import Footer from "../components/general/Footer";
+import { Spin } from "antd";
 
 export default function FashionMen() {
   const [pageNo, setPageNo] = useState(0);
@@ -18,11 +19,11 @@ export default function FashionMen() {
     productCode: "DKFASH",
   };
 
-  const { data: products } = useQuery({
+  const { data: products, isLoading } = useQuery({
     queryKey: ["getFashionQuery", { pageNo }],
     queryFn: () => getProductsByDescription(payload),
   });
-  
+
   products &&
     setLocalData<ProductDescription[] | undefined>(
       "fashion-products",
@@ -33,7 +34,13 @@ export default function FashionMen() {
     <div>
       <FashionMain />
       <FashionCategories />
-      <FashionSales products={products} pageNo={pageNo} setPageNo={setPageNo} />
+      <Spin spinning={isLoading}>
+        <FashionSales
+          products={products}
+          pageNo={pageNo}
+          setPageNo={setPageNo}
+        />
+      </Spin>
       <Footer />
     </div>
   );

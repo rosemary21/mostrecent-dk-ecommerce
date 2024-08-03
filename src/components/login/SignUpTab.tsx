@@ -50,7 +50,7 @@ export default function SignUpTab({ setTab }: Props) {
           .min(6, "Password must be minimum of six characters")
           .trim()
           .required(ERRORS.required),
-        userName: string().required(ERRORS.required),
+        userName: string().trim().email(ERRORS.email).required(ERRORS.required),
         userType: string(),
       }),
       onSubmit: async (
@@ -84,7 +84,7 @@ export default function SignUpTab({ setTab }: Props) {
     });
   return (
     <div className="overflow-hidden">
-      <p className="text-[#888888] text-[14px] font-medium text-center">
+      <p className="text-muted text-[14px] font-medium text-center">
         Create an Account
       </p>
 
@@ -138,7 +138,7 @@ export default function SignUpTab({ setTab }: Props) {
                 type={type1}
               />
               <span
-                className="text-[12px] text-[#888888] transition-all duration-500 hover:text-primary cursor-pointer"
+                className="text-[12px] text-muted transition-all duration-500 hover:text-primary cursor-pointer"
                 onClick={() => toggleType(type1, setType1)}
               >
                 {type1 === "password" ? "SHOW" : "HIDE"}
@@ -158,7 +158,7 @@ export default function SignUpTab({ setTab }: Props) {
                 type={type2}
               />
               <span
-                className="text-[12px] text-[#888888] transition-all duration-500 hover:text-primary cursor-pointer"
+                className="text-[12px] text-muted transition-all duration-500 hover:text-primary cursor-pointer"
                 onClick={() => toggleType(type2, setType2)}
               >
                 {type2 === "password" ? "SHOW" : "HIDE"}
@@ -170,7 +170,9 @@ export default function SignUpTab({ setTab }: Props) {
           </div>
 
           <button
-            disabled={isValid === false || isSubmitting}
+            disabled={
+              isValid === false || isSubmitting || !values.confirmPassword
+            }
             className="w-full bg-primary text-white border-0 outline-0 h-[40px] mt-4 font-medium"
           >
             SIGN UP

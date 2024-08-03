@@ -6,7 +6,7 @@ import CartItemCard from "../components/cart/CartItemCard";
 import Footer from "../components/general/Footer";
 import { ROUTES } from "../routes";
 import { useEffect, useState } from "react";
-import { ProductDescription } from "../types/Response";
+import { LoginResponseProps, ProductDescription } from "../types/Response";
 import { getLocalData, setLocalData } from "../utils/localData";
 import formatCurrency from "../utils/FormatCurrency";
 import openNotification from "../utils/OpenNotification";
@@ -15,7 +15,8 @@ export default function Cart() {
   const [fashionItems, setFashionItems] = useState<ProductDescription[]>([]);
   const [artItems, setArtItems] = useState<ProductDescription[]>([]);
   const navigate = useNavigate();
-  const { clearCart, cartCount, cart } = useCartContext();
+  const { clearCart, cartCount, cart, setActiveCheckoutAccordion } =
+    useCartContext();
 
   const totalAmount = cart.reduce((tot, cartItem) => {
     const item = [...fashionItems, ...artItems].find(
@@ -24,16 +25,25 @@ export default function Cart() {
     return tot + (item?.amount || 0) * cartItem.count;
   }, 0);
 
-  const charge = 3000;
-
-  setLocalData<number>("totalAmount", totalAmount + charge);
+  setLocalData<number>("totalAmount", totalAmount);
 
   const routeToCheckOut = () => {
     if (cartCount() === 0) {
       openNotification("warning", "Add item(s) to cart to continue");
       return;
     }
-    navigate(`/${ROUTES.checkout}`);
+    // Check if user is logged in
+    const userDetails = getLocalData<LoginResponseProps>("user-details");
+    if (!userDetails?.token) {
+      navigate(`/${ROUTES.checkout}`);
+      setActiveCheckoutAccordion("Sign In");
+      window.scroll(0, 0);
+      return;
+    } else {
+      navigate(`/${ROUTES.checkout}`);
+      setActiveCheckoutAccordion("Delivery Details");
+      return;
+    }
   };
 
   useEffect(() => {
@@ -98,19 +108,9 @@ export default function Cart() {
         </div>
 
         <div className="w-full grid grid-cols-[30%_1fr] gap-3">
-          <p className="font-poppins font-normal text-[16px]">
-            Subtotal{" "}
-            <span className="text-[11px] text-muted">(Delivery & VAT)</span>
-          </p>
-          <p className="font-poppins font-normal text-[16px] flex items-center justify-end">
-            ₦ {formatCurrency(charge)}
-          </p>
-        </div>
-
-        <div className="w-full grid grid-cols-[30%_1fr] gap-3">
           <p className="font-poppins text-[16px] font-bold">Total Amount</p>
           <p className="font-poppins font-bold text-[16px] flex items-center justify-end">
-            ₦ {formatCurrency(totalAmount + charge)}
+            ₦ {formatCurrency(totalAmount)}
           </p>
         </div>
 

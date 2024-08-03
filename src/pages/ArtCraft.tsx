@@ -8,6 +8,7 @@ import { ProductDescription } from "../types/Response";
 import ArtCraftCategories from "../components/artCraft/ArtCraftCategories";
 import ArtCraftSales from "../components/artCraft/ArtCraftSales";
 import Footer from "../components/general/Footer";
+import { Spin } from "antd";
 
 export default function ArtCraft() {
   const [pageNo, setPageNo] = useState(0);
@@ -18,7 +19,7 @@ export default function ArtCraft() {
     productCode: "DKART",
   };
 
-  const { data: products } = useQuery({
+  const { data: products, isLoading } = useQuery({
     queryKey: ["getArtCraftQuery", { pageNo }],
     queryFn: () => getProductsByDescription(payload),
   });
@@ -31,11 +32,13 @@ export default function ArtCraft() {
     <>
       <ArtCraftMain />
       <ArtCraftCategories />
-      <ArtCraftSales
-        pageNo={pageNo}
-        products={products}
-        setPageNo={setPageNo}
-      />
+      <Spin spinning={isLoading}>
+        <ArtCraftSales
+          pageNo={pageNo}
+          products={products}
+          setPageNo={setPageNo}
+        />
+      </Spin>
       <Footer />
     </>
   );

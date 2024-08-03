@@ -7,13 +7,14 @@ import InputError from "../../utils/InputError";
 import { login } from "../../services/api/API";
 import { LoginPayload } from "../../types/Payload";
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../routes";
 import { setLocalData } from "../../utils/localData";
 import { LoginResponseProps } from "../../types/Response";
 import { Spin } from "antd";
+import { useCartContext } from "../../contexts/CartContext";
 
 export default function LoginTab() {
   const [type, setType] = useState("password");
+  const { setIsLoggedIn } = useCartContext();
 
   const navigate = useNavigate();
 
@@ -32,7 +33,7 @@ export default function LoginTab() {
         password: "",
       },
       validationSchema: object().shape({
-        userName: string().trim().required(ERRORS.required),
+        userName: string().trim().email(ERRORS.email).required(ERRORS.required),
         password: string()
           .min(6, "Password must be minimum of six characters")
           .trim()
@@ -48,8 +49,9 @@ export default function LoginTab() {
         };
         const data = await login(payload);
         if (data?.responseDto?.code === dkSuccess) {
-          navigate(`/${ROUTES.profile}`);
+          navigate(-1);
           setLocalData<LoginResponseProps>("user-details", data);
+          setIsLoggedIn(true);
           resetForm();
           setSubmitting(false);
         }
@@ -58,7 +60,7 @@ export default function LoginTab() {
 
   return (
     <div>
-      <p className="text-[#888888] text-[14px] font-medium text-center">
+      <p className="text-muted text-[14px] font-medium text-center">
         Sign in with your Email and password
       </p>
 
@@ -87,7 +89,7 @@ export default function LoginTab() {
                 type={type}
               />
               <span
-                className="text-[12px] text-[#888888] transition-all duration-500 hover:text-primary cursor-pointer"
+                className="text-[12px] text-muted transition-all duration-500 hover:text-primary cursor-pointer"
                 onClick={toggleType}
               >
                 {type === "password" ? "SHOW" : "HIDE"}

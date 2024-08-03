@@ -9,13 +9,11 @@ import ArtCraft from "./pages/ArtCraft";
 import CaseStudy from "./pages/CaseStudy";
 import Checkout from "./pages/Checkout";
 import { ROUTES } from "./routes";
-// import Customise from "./pages/Customise";
 import Login from "./pages/Login";
 import PrivacyPolicies from "./pages/PrivacyPolicies";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ContactUs from "./pages/ContactUs";
 import FashionKids from "./pages/FashionKids";
-import Profile from "./pages/Profile";
 import Software from "./pages/Software";
 import WallPainting from "./pages/WallPainting";
 import HandCrafted from "./pages/HandCrafted";
@@ -27,14 +25,14 @@ function App() {
   const onIdle = async () => {
     await logOut();
     openNotification(
-      "success",
-      "User has been inactive for more than 5 minutes."
+      "error",
+      "User has been inactive for more than 10 minutes."
     );
   };
 
   useIdleTimer({
     onIdle,
-    timeout: 1000 * 60 * 5,
+    timeout: 1000 * 60 * 10,
     promptTimeout: 0,
     startOnMount: true,
     stopOnIdle: false,
@@ -78,12 +76,10 @@ function App() {
           <Route path={ROUTES.software} element={<Software />} />
           <Route path={ROUTES.CaseStudy} element={<CaseStudy />} />
           <Route path={ROUTES.checkout} element={<Checkout />} />
-          {/* <Route path={ROUTES.customise} element={<Customise />} /> */}
           <Route path={ROUTES.login} element={<Login />} />
           <Route path={ROUTES.privacy} element={<PrivacyPolicies />} />
           <Route path={ROUTES.terms} element={<TermsAndConditions />} />
           <Route path={ROUTES.contactUs} element={<ContactUs />} />
-          <Route path={ROUTES.profile} element={<Profile />} />
           <Route path={ROUTES.wallPainting} element={<WallPainting />} />
           <Route path={ROUTES.handCrafted} element={<HandCrafted />} />
         </Route>

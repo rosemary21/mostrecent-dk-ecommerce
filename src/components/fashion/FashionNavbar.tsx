@@ -8,12 +8,18 @@ import isMobile from "../../utils/isMobile";
 import { fashionNavs } from "../../data";
 import { ROUTES } from "../../routes";
 import { useCartContext } from "../../contexts/CartContext";
+import { AiOutlineLogout } from "react-icons/ai";
+import { logOut } from "../../services/api/API";
 
 export default function FashionNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = useLocation().pathname.split("/")[1];
 
-  const { cartCount, cartControls } = useCartContext();
+  const { cartCount, cartControls, user } = useCartContext();
+
+  const handleLogOut = async () => {
+    await logOut();
+  };
 
   return (
     <>
@@ -53,14 +59,22 @@ export default function FashionNavbar() {
         </div>
 
         <div className="flex items-center gap-7 relative overflow-visible">
-          <Link to={`/${ROUTES.login}`}>
-            <img
-              src="/assets/user-icon.svg"
-              alt="user icon"
-              className="cursor-pointer w-[19px] h-[20px]"
-              title="Login or Create account"
+          {user?.token ? (
+            <AiOutlineLogout
+              className="text-[22px] cursor-pointer text-[#71717A]"
+              title="Logout"
+              onClick={handleLogOut}
             />
-          </Link>
+          ) : (
+            <Link to={`/${ROUTES.login}`}>
+              <img
+                src="/assets/user-icon.svg"
+                alt="user icon"
+                className="cursor-pointer w-[19px] h-[20px]"
+                title="Login or Create account"
+              />
+            </Link>
+          )}
 
           <Link to={`#`}>
             <Tooltip title="WishList Coming soon">

@@ -6,7 +6,7 @@ import CheckoutRight from "../components/checkout/CheckoutRight";
 import Footer from "../components/general/Footer";
 import { getLocalData } from "../utils/localData";
 import { LoginResponseProps } from "../types/Response";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { useCartContext } from "../contexts/CartContext";
 
 export type ActiveCheckoutAccordion =
   | "Sign In"
@@ -14,11 +14,8 @@ export type ActiveCheckoutAccordion =
   | "Billing Details";
 
 export default function Checkout() {
-  const [activeCheckoutAccordion, setActiveCheckoutAccordion] =
-    useLocalStorage<ActiveCheckoutAccordion>(
-      "activeCheckoutAccordion",
-      "Sign In"
-    );
+  const { activeCheckoutAccordion, setActiveCheckoutAccordion } =
+    useCartContext();
 
   const navigate = useNavigate();
   const data = getLocalData<LoginResponseProps>("user-details");
@@ -41,7 +38,7 @@ export default function Checkout() {
 
         {data?.emailAddress && (
           <p className="text-[14px] font-medium text-muted text-center">
-            Welcome {data.emailAddress}
+            Welcome {data.emailAddress.split("@")[0]}
           </p>
         )}
 

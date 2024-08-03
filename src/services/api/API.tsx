@@ -105,9 +105,9 @@ export const logOut = async () => {
     const { data } = await axiosInstance.get<LogOutResponse>(url);
     if (data?.resp?.code === dkSuccess) {
       openNotification("success", data?.resp?.message);
-      window.location.href = "/";
-      localStorage.clear();
+      localStorage.removeItem("user-details");
       sessionStorage.clear();
+      window.location.reload();
       return data;
     }
   } catch (error) {

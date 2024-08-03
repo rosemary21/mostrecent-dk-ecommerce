@@ -18,7 +18,7 @@ export default function Features() {
             <h1 className="font-montserrat md:text-[24px] text-[18px] font-semibold">
               {title}
             </h1>
-            <p className="font-poppins md:text-[14px] text-[12px] text-[#888888]">
+            <p className="font-poppins md:text-[14px] text-[12px] text-muted">
               {subtitle}
             </p>
           </div>

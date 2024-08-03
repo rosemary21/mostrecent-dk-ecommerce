@@ -14,6 +14,7 @@ import { Spin } from "antd";
 import { useState } from "react";
 import InputError from "../../utils/InputError";
 import { ActiveCheckoutAccordion } from "../../pages/Checkout";
+import { useCartContext } from "../../contexts/CartContext";
 
 interface FormProps {
   userName: string;
@@ -21,11 +22,17 @@ interface FormProps {
 }
 interface Props {
   userDetails: LoginResponseProps | null;
-  setActiveCheckoutAccordion: React.Dispatch<React.SetStateAction<ActiveCheckoutAccordion>>
+  setActiveCheckoutAccordion: React.Dispatch<
+    React.SetStateAction<ActiveCheckoutAccordion>
+  >;
 }
 
-export default function SignInForm({ userDetails, setActiveCheckoutAccordion }: Props) {
+export default function SignInForm({
+  userDetails,
+  setActiveCheckoutAccordion,
+}: Props) {
   const { setTab } = useAppContext();
+  const { setIsLoggedIn } = useCartContext();
   const [type, setType] = useState("password");
   const navigate = useNavigate();
 
@@ -69,6 +76,7 @@ export default function SignInForm({ userDetails, setActiveCheckoutAccordion }: 
           resetForm();
           setSubmitting(false);
           setActiveCheckoutAccordion("Delivery Details");
+          setIsLoggedIn(true);
         }
       },
     });
@@ -101,7 +109,7 @@ export default function SignInForm({ userDetails, setActiveCheckoutAccordion }: 
                 type={type}
               />
               <span
-                className="text-[12px] text-[#888888] transition-all duration-500 hover:text-primary cursor-pointer"
+                className="text-[12px] text-muted transition-all duration-500 hover:text-primary cursor-pointer"
                 onClick={toggleType}
               >
                 {type === "password" ? "SHOW" : "HIDE"}

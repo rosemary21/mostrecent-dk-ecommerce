@@ -19,16 +19,7 @@ export default function CheckoutRight() {
         <CheckoutCartCard key={item.id} {...item} />
       ))}
 
-      <div className="w-full flex items-center justify-between">
-        <p className="font-poppins text-[14px] text-[#46312a] font-normal">
-          Delivery Information
-        </p>
-        <p className="font-poppins text-[15px] text-[#46312a] font-semibold">
-          ₦ {formatCurrency(5000)}
-        </p>
-      </div>
-
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full flex items-center mt-5 justify-between">
         <p className="font-poppins text-[14px] text-[#46312a] font-normal">
           Total
         </p>
