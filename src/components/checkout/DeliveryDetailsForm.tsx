@@ -1,41 +1,57 @@
-import { ChangeEvent } from "react";
-import useLocalStorage from "../../hooks/useLocalStorage";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ChangeEvent, useState } from "react";
 import PrimaryInput from "../general/PrimaryInput";
-
-interface FormValues {
-  state: string;
-  zipCode: string;
-  address: string;
-  city: string;
-  userName: string;
-  lga: string;
+import NaijaStates from "naija-state-local-government";
+import { NigeriaZipCodes } from "../../data";
+import { LoginResponseProps } from "../../types/Response";
+import { ActiveCheckoutAccordion } from "../../pages/Checkout";
+import { useCartContext } from "../../contexts/CartContext";
+interface Props {
+  userDetails: LoginResponseProps | null;
+  setActiveCheckoutAccordion: React.Dispatch<
+    React.SetStateAction<ActiveCheckoutAccordion>
+  >;
 }
 
-export default function DeliveryDetailsForm() {
-  const [formValues, setFormValues] = useLocalStorage<FormValues>(
-    "delivery-details",
-    {
-      state: "",
-      zipCode: "",
-      address: "",
-      city: "",
-      userName: "",
-      lga: "",
-    }
-  );
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+export default function DeliveryDetailsForm({
+  userDetails,
+  setActiveCheckoutAccordion,
+}: Props) {
+  const { formValues, setFormValues } = useCartContext();
+  const [lgas, setLgas] = useState<string[]>([]);
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
+  };
+
+  const handleStateChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const index = NaijaStates.states()?.indexOf(e.target.value);
+    const zipCode = NigeriaZipCodes[index];
+    setFormValues((prev) => ({
+      ...prev,
+      [e.target.name]: [e.target.value],
+      zipCode: zipCode,
+    }));
+    setLgas(NaijaStates.lgas(e.target.value)?.lgas);
   };
 
   return (
     <div className="w-full grid grid-cols-2 gap-4">
-      <PrimaryInput
-        id="state"
+      <select
         name="state"
-        onChange={handleChange}
+        id="state"
         value={formValues.state}
-        placeholder="State"
-      />
+        onChange={handleStateChange}
+        className="w-full h-[42px] leading-[42px] bg-white border-b border-[#d0d5dd] outline-0 transition-all duration-500 rounded-none placeholder:text-muted text-black text-[14px] font-normal font-poppins"
+      >
+        <option value="">--Select state--</option>
+        {NaijaStates.states()?.map((state: any) => (
+          <option key={state}>{state}</option>
+        ))}
+      </select>
+
       <PrimaryInput
         id="zipCode"
         name="zipCode"
@@ -43,6 +59,7 @@ export default function DeliveryDetailsForm() {
         value={formValues.zipCode}
         placeholder="Zip code"
       />
+
       <PrimaryInput
         id="address"
         name="address"
@@ -50,6 +67,7 @@ export default function DeliveryDetailsForm() {
         value={formValues.address}
         placeholder="Address"
       />
+
       <PrimaryInput
         id="city"
         name="city"
@@ -57,20 +75,39 @@ export default function DeliveryDetailsForm() {
         value={formValues.city}
         placeholder="City"
       />
+
       <PrimaryInput
         id="username"
         name="username"
         onChange={handleChange}
-        value={formValues.userName}
+        value={userDetails?.emailAddress as string}
         placeholder="User name"
+        disabled
       />
-      <PrimaryInput
-        id="lga"
+
+      <select
         name="lga"
-        onChange={handleChange}
+        id="lga"
         value={formValues.lga}
-        placeholder="Local Govt. Area"
-      />
+        onChange={(e) => {
+          handleChange(e);
+          if (
+            formValues.address &&
+            formValues.city &&
+            formValues.lga &&
+            formValues.state &&
+            formValues.zipCode
+          ) {
+            setActiveCheckoutAccordion("Billing Details");
+          }
+        }}
+        className="w-full h-[42px] leading-[42px] bg-white border-b border-[#d0d5dd] outline-0 transition-all duration-500 rounded-none placeholder:text-muted text-black text-[14px] font-normal font-poppins"
+      >
+        <option value="">--Select L.G.A.--</option>
+        {lgas?.map((state: any) => (
+          <option key={state}>{state}</option>
+        ))}
+      </select>
     </div>
   );
 }

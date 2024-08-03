@@ -10,6 +10,14 @@ export interface CartProps {
   count: number;
 }
 
+interface DeliveryFormValues {
+  state: string;
+  zipCode: string;
+  address: string;
+  city: string;
+  lga: string;
+}
+
 interface ContextProps {
   addToCart: (id: number) => void;
   removeItemFromCart: (id: number) => void;
@@ -23,6 +31,8 @@ interface ContextProps {
   allBrandItems: () => void;
   cart: CartProps[];
   setCart: React.Dispatch<React.SetStateAction<CartProps[]>>;
+  formValues: DeliveryFormValues;
+  setFormValues: React.Dispatch<React.SetStateAction<DeliveryFormValues>>;
 }
 
 const Context = createContext({} as ContextProps);
@@ -41,6 +51,16 @@ export default function CartContextProvider({
 
   const [fashionItems, setFashionItems] = useState<ProductDescription[]>([]);
   const [artItems, setArtItems] = useState<ProductDescription[]>([]);
+  const [formValues, setFormValues] = useLocalStorage<DeliveryFormValues>(
+    "delivery-details",
+    {
+      state: "",
+      zipCode: "",
+      address: "",
+      city: "",
+      lga: "",
+    }
+  );
 
   const cartCount = () => {
     return cart.reduce((qty, item) => qty + item.count, 0);
@@ -134,6 +154,8 @@ export default function CartContextProvider({
     cart,
     setCart,
     allBrandItems,
+    formValues,
+    setFormValues,
   };
   return <Context.Provider value={values}>{children}</Context.Provider>;
 }

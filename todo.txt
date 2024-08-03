@@ -1,0 +1,7 @@
+[] Remove all VAT until we get the response from BE
+[] Display a modal for the VAT and charge
+[] Initialise card and tokenize
+[] Design success page
+[] Design profile page
+[] Implement add transaction.
+[] Display user transactions

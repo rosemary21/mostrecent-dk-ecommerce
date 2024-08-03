@@ -4,24 +4,24 @@ import ArtCraftNavbar from "../components/artCraft/ArtCraftNavbar";
 import CheckoutLeft from "../components/checkout/CheckoutLeft";
 import CheckoutRight from "../components/checkout/CheckoutRight";
 import Footer from "../components/general/Footer";
-import { useEffect, useState } from "react";
 import { getLocalData } from "../utils/localData";
 import { LoginResponseProps } from "../types/Response";
+import useLocalStorage from "../hooks/useLocalStorage";
+
+export type ActiveCheckoutAccordion =
+  | "Sign In"
+  | "Delivery Details"
+  | "Billing Details";
 
 export default function Checkout() {
-  const [userDetails, setUserDetails] = useState<LoginResponseProps | null>(
-    null
-  );
+  const [activeCheckoutAccordion, setActiveCheckoutAccordion] =
+    useLocalStorage<ActiveCheckoutAccordion>(
+      "activeCheckoutAccordion",
+      "Sign In"
+    );
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const data = getLocalData<LoginResponseProps>("user-details");
-    if (!data) return;
-    setUserDetails(data);
-  }, []);
-
-  console.log("first");
+  const data = getLocalData<LoginResponseProps>("user-details");
 
   return (
     <>
@@ -39,14 +39,18 @@ export default function Checkout() {
           <div />
         </div>
 
-        {userDetails?.emailAddress && (
+        {data?.emailAddress && (
           <p className="text-[14px] font-medium text-muted text-center">
-            You are logged in as {userDetails.emailAddress}
+            Welcome {data.emailAddress}
           </p>
         )}
 
         <div className="mt-8 w-full flex md:flex-row flex-col items-start justify-between gap-6 my-6">
-          <CheckoutLeft userDetails={userDetails} />
+          <CheckoutLeft
+            userDetails={data}
+            setActiveCheckoutAccordion={setActiveCheckoutAccordion}
+            activeCheckoutAccordion={activeCheckoutAccordion}
+          />
           <CheckoutRight />
         </div>
       </div>

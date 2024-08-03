@@ -98,7 +98,10 @@ export default function Cart() {
         </div>
 
         <div className="w-full grid grid-cols-[30%_1fr] gap-3">
-          <p className="font-poppins font-normal text-[16px]">Subtotal</p>
+          <p className="font-poppins font-normal text-[16px]">
+            Subtotal{" "}
+            <span className="text-[11px] text-muted">(Delivery & VAT)</span>
+          </p>
           <p className="font-poppins font-normal text-[16px] flex items-center justify-end">
             ₦ {formatCurrency(charge)}
           </p>
