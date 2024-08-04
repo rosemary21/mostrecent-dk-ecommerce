@@ -72,3 +72,65 @@ export type LogOutResponse = {
   resp: ResponseDto;
   firstTimeLogin: boolean;
 };
+
+export type AddDeliveryResponse = {
+  responseDto: ResponseDto;
+  deliverydto: any;
+};
+
+export type DeliveryDto = {
+  firstName: string;
+  lastName: string;
+  address: string;
+  zipCode: string;
+  state: string;
+  city: string;
+  userName: string;
+  localGovernment: string;
+  feeDto: {
+    localGovArea: string;
+    doorDeliveryFee: string;
+    deliveryPeriod: string;
+  };
+};
+
+export type CheckoutResponse = {
+  responseDto: ResponseDto;
+  deliverydto: DeliveryDto;
+};
+
+export type InitializeTransactionProps = {
+  status: boolean;
+  message: string;
+  email: any;
+  data: {
+    amount: any;
+    currency: any;
+    transaction_date: any;
+    metadata: any;
+    id: any;
+    status: any;
+    access_code: string;
+    reference: string;
+    domain: any;
+    gateway_response: any;
+    message: any;
+    channel: any;
+    ip_address: any;
+    authorization_url: string;
+    fees: any;
+    plan: any;
+    paid_at: any;
+    requested_amount: any;
+    created_at: any;
+    history: any;
+    authorization: any;
+    customer: any;
+  };
+};
+
+export type InitializeCardResponse = {
+  responseDto: ResponseDto;
+  initializeTransactionResponse: InitializeTransactionProps;
+  paystackVerifyTransactionResponse: any;
+};

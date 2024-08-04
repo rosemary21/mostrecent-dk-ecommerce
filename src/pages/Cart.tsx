@@ -50,14 +50,14 @@ export default function Cart() {
     const fashionItems = getLocalData<ProductDescription[] | undefined>(
       "fashion-products"
     );
+    if (!fashionItems) return;
+    setFashionItems(fashionItems);
+  }, []);
+  useEffect(() => {
     const artItems = getLocalData<ProductDescription[] | undefined>(
       "artCraft-products"
     );
-
-    if (!fashionItems) return;
     if (!artItems) return;
-
-    setFashionItems(fashionItems);
     setArtItems(artItems);
   }, []);
 

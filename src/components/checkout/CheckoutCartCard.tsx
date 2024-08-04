@@ -18,14 +18,14 @@ export default function CheckoutCartCard({ count, id }: Props) {
     const fashionItems = getLocalData<ProductDescription[] | undefined>(
       "fashion-products"
     );
+    if (!fashionItems) return;
+    setFashionItems(fashionItems);
+  }, []);
+  useEffect(() => {
     const artItems = getLocalData<ProductDescription[] | undefined>(
       "artCraft-products"
     );
-
-    if (!fashionItems) return;
     if (!artItems) return;
-
-    setFashionItems(fashionItems);
     setArtItems(artItems);
   }, []);
 
@@ -37,7 +37,7 @@ export default function CheckoutCartCard({ count, id }: Props) {
         className="w-full h-full overflow-hidden"
       />
 
-      <div>
+      <div className="overflow-hidden">
         <h4 className="text-[13px] font-poppins font-medium">
           {item?.description}
         </h4>

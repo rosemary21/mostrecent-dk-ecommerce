@@ -34,3 +34,17 @@ export interface SignUpPayload {
   userName: string;
   password: string;
 }
+
+export interface CheckoutPayload {
+  address: string;
+  zipCode: string;
+  state: string;
+  city: string;
+  userName: string;
+  localGovernment: string;
+}
+
+export interface InitializeCardPayload {
+  email: string;
+  amount: number;
+}

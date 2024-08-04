@@ -11,12 +11,14 @@ interface Props {
     React.SetStateAction<ActiveCheckoutAccordion>
   >;
   activeCheckoutAccordion: string;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AccordionItem({
   userDetails,
   setActiveCheckoutAccordion,
   activeCheckoutAccordion,
+  setIsLoading,
 }: Props) {
   return (
     <>
@@ -71,6 +73,7 @@ export default function AccordionItem({
           <BillingDetails
             userDetails={userDetails}
             setActiveCheckoutAccordion={setActiveCheckoutAccordion}
+            setIsLoading={setIsLoading}
           />
         </div>
       </div>

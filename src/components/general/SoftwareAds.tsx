@@ -21,7 +21,10 @@ export default function SoftwareAds() {
 
         <div className="flex md:flex-row flex-col items-start gap-5 justify-between py-4 px-2">
           {contents.map(({ date, id, imageUrl, title }) => (
-            <div className="bg-white h-[360px] md:w-[300px] w-full rounded-[15px] transition-all duration-500 hover:shadow-lg shadow-sm">
+            <div
+              key={id}
+              className="bg-white h-[360px] md:w-[300px] w-full rounded-[15px] transition-all duration-500 hover:shadow-lg shadow-sm"
+            >
               <div className="w-full h-1/2 rounded-t-[15px] overflow-hidden">
                 <img
                   src={imageUrl}

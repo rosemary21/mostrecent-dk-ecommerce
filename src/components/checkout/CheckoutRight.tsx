@@ -14,7 +14,7 @@ export default function CheckoutRight() {
     setTotalAmount(data);
   }, []);
   return (
-    <div className="md:w-[400px] w-full md:h-[370px] h-[340px] bg-[#F8FAFC] md:py-[25px] py-[20px] md:px-[15px] px-[10px] gap-5">
+    <div className="md:w-[400px] bg-[#F8FAFC] md:py-[25px] py-[20px] md:px-[15px] px-[10px] gap-5">
       {cart?.map((item) => (
         <CheckoutCartCard key={item.id} {...item} />
       ))}

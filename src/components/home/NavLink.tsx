@@ -17,7 +17,7 @@ export default function NavLink({ link, text, path, color, id }: Props) {
       transition={{ duration: 0.8, delay: Number(`0.${id}`) }}
     >
       <Link
-        to={`/${link}`}
+        to={link}
         className={`lg:text-[15px] md:text-[14px] text-[12px] font-montserrat ${
           pathname.toLowerCase() === path.toLowerCase()
             ? "text-primary font-bold"

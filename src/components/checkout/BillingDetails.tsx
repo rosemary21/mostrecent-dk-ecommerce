@@ -1,23 +1,38 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import PrimaryInput from "../general/PrimaryInput";
 import { useCartContext } from "../../contexts/CartContext";
-import { LoginResponseProps } from "../../types/Response";
+import { DeliveryDto, LoginResponseProps } from "../../types/Response";
 import { ActiveCheckoutAccordion } from "../../pages/Checkout";
-import { getLocalData } from "../../utils/localData";
+import { getLocalData, setLocalData } from "../../utils/localData";
 import openNotification from "../../utils/OpenNotification";
+import { CheckoutPayload } from "../../types/Payload";
+import { addDelivery, checkout } from "../../services/api/API";
+import { dkSuccess } from "../../data";
+import CheckoutModal from "../modals/CheckoutModal";
 
 interface Props {
   userDetails: LoginResponseProps | null;
   setActiveCheckoutAccordion: React.Dispatch<
     React.SetStateAction<ActiveCheckoutAccordion>
   >;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function BillingDetails({
   userDetails,
   setActiveCheckoutAccordion,
+  setIsLoading,
 }: Props) {
+  const [showModal, setShowModal] = useState(false);
   const { formValues, setFormValues } = useCartContext();
+
+  const handleShow = () => {
+    setShowModal(true);
+  };
+
+  const handleHide = () => {
+    setShowModal(false);
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
@@ -31,6 +46,7 @@ export default function BillingDetails({
       setActiveCheckoutAccordion("Sign In");
       return;
     }
+
     // Check if we have all the data needed for checkout
     if (
       !formValues.address ||
@@ -43,8 +59,34 @@ export default function BillingDetails({
       setActiveCheckoutAccordion("Delivery Details");
       return;
     }
-    // Initiate Checkout
-    // Display the doorDeliveryFee & deliveryPeriod on a modal
+
+    // Add delivery
+    setIsLoading(true);
+    const payload: CheckoutPayload = {
+      address: formValues.address[0],
+      city: formValues.city[0],
+      state: formValues.state[0],
+      zipCode: formValues.zipCode,
+      localGovernment: formValues.lga[0],
+      userName: userDetails?.emailAddress as string,
+    };
+
+    const response = await addDelivery(payload);
+    if (response?.responseDto?.code === dkSuccess) {
+      const res = await checkout(payload);
+      setLocalData<DeliveryDto>("deliveryDto", res?.deliverydto);
+      handleShow();
+      setIsLoading(false);
+      setFormValues((prev) => ({
+        ...prev,
+        address: "",
+        city: "",
+        lga: "",
+        state: "",
+        zipCode: "",
+      }));
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -72,6 +114,8 @@ export default function BillingDetails({
       >
         Checkout
       </button>
+
+      <CheckoutModal isOpen={showModal} onClose={handleHide} />
     </div>
   );
 }

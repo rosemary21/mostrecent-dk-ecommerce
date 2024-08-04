@@ -17,19 +17,20 @@ export default function CartItemCard({ count, id }: Props) {
   const { addToCart, removeItemFromCart, removeFromCart } = useCartContext();
 
   const item = [...fashionItems, ...artItems].find((item) => item.id === id);
+  console.log(item);
 
   useEffect(() => {
     const fashionItems = getLocalData<ProductDescription[] | undefined>(
       "fashion-products"
     );
+    if (!fashionItems) return;
+    setFashionItems(fashionItems);
+  }, []);
+  useEffect(() => {
     const artItems = getLocalData<ProductDescription[] | undefined>(
       "artCraft-products"
     );
-
-    if (!fashionItems) return;
     if (!artItems) return;
-
-    setFashionItems(fashionItems);
     setArtItems(artItems);
   }, []);
 

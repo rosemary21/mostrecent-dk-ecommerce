@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import ArtCraftNavbar from "../components/artCraft/ArtCraftNavbar";
@@ -7,6 +8,8 @@ import Footer from "../components/general/Footer";
 import { getLocalData } from "../utils/localData";
 import { LoginResponseProps } from "../types/Response";
 import { useCartContext } from "../contexts/CartContext";
+import { useLayoutEffect } from "react";
+import { ROUTES } from "../routes";
 
 export type ActiveCheckoutAccordion =
   | "Sign In"
@@ -14,12 +17,17 @@ export type ActiveCheckoutAccordion =
   | "Billing Details";
 
 export default function Checkout() {
-  const { activeCheckoutAccordion, setActiveCheckoutAccordion } =
+  const { activeCheckoutAccordion, setActiveCheckoutAccordion, cart } =
     useCartContext();
 
   const navigate = useNavigate();
   const data = getLocalData<LoginResponseProps>("user-details");
 
+  useLayoutEffect(() => {
+    if (cart?.length === 0) {
+      window.location.href = `/${ROUTES.cart}`;
+    }
+  }, []);
   return (
     <>
       <ArtCraftNavbar />

@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { ActiveCheckoutAccordion } from "../../pages/Checkout";
 import { LoginResponseProps } from "../../types/Response";
 import AccordionItem from "./AccordionItem";
+import { Spin } from "antd";
 
 interface Props {
   userDetails: LoginResponseProps | null;
@@ -15,13 +17,17 @@ export default function CheckoutLeft({
   setActiveCheckoutAccordion,
   activeCheckoutAccordion,
 }: Props) {
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <div className="md:w-[400px] w-full">
-      <AccordionItem
-        userDetails={userDetails}
-        setActiveCheckoutAccordion={setActiveCheckoutAccordion}
-        activeCheckoutAccordion={activeCheckoutAccordion}
-      />
+      <Spin spinning={isLoading}>
+        <AccordionItem
+          userDetails={userDetails}
+          setActiveCheckoutAccordion={setActiveCheckoutAccordion}
+          activeCheckoutAccordion={activeCheckoutAccordion}
+          setIsLoading={setIsLoading}
+        />
+      </Spin>
     </div>
   );
 }
