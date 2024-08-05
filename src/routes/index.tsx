@@ -19,4 +19,5 @@ export const ROUTES = {
   profile: "profile",
   wallPainting: "wall-painting",
   handCrafted: "hand-crafted",
+  transactionSuccess: "transaction-success",
 };

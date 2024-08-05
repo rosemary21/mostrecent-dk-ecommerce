@@ -1,5 +1,6 @@
 import { dkSuccess } from "../../data";
 import {
+  AddTransactionPayload,
   CheckoutPayload,
   ContactUsPayload,
   GetProductDescriptionPayload,
@@ -10,6 +11,7 @@ import {
 } from "../../types/Payload";
 import {
   AddDeliveryResponse,
+  AddTransactionResponse,
   CheckoutResponse,
   ContactUsResponse,
   GetProductDescriptionResponse,
@@ -168,6 +170,24 @@ export const initializeCard = async (payload: InitializeCardPayload) => {
     }
   } catch (error) {
     const data = catchError<InitializeCardResponse>(error);
+    openNotification("error", data?.responseDto?.message);
+    return;
+  }
+};
+
+export const addTransaction = async (payload: AddTransactionPayload) => {
+  try {
+    const url = `transaction/add`;
+    const { data } = await axiosInstance.post<AddTransactionResponse>(
+      url,
+      payload
+    );
+    if (data?.responseDto?.code === dkSuccess) {
+      openNotification("success", data?.responseDto?.message);
+      return data;
+    }
+  } catch (error) {
+    const data = catchError<AddTransactionResponse>(error);
     openNotification("error", data?.responseDto?.message);
     return;
   }

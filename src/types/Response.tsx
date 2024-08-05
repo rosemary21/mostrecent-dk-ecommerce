@@ -134,3 +134,7 @@ export type InitializeCardResponse = {
   initializeTransactionResponse: InitializeTransactionProps;
   paystackVerifyTransactionResponse: any;
 };
+
+export type AddTransactionResponse = {
+  responseDto: ResponseDto;
+};

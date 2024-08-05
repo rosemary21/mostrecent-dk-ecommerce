@@ -37,6 +37,11 @@ export default function DeliveryDetailsForm({
     setLgas(NaijaStates.lgas(e.target.value)?.lgas);
   };
 
+  const handleChangeLga = (e: ChangeEvent<HTMLSelectElement>) => {
+    setFormValues((prev) => ({ ...prev, lga: e.target.value }));
+    setActiveCheckoutAccordion("Billing Details");
+  };
+
   return (
     <div className="w-full grid grid-cols-2 gap-4">
       <select
@@ -89,18 +94,7 @@ export default function DeliveryDetailsForm({
         name="lga"
         id="lga"
         value={formValues.lga}
-        onChange={(e) => {
-          handleChange(e);
-          if (
-            formValues.address &&
-            formValues.city &&
-            formValues.lga &&
-            formValues.state &&
-            formValues.zipCode
-          ) {
-            setActiveCheckoutAccordion("Billing Details");
-          }
-        }}
+        onChange={handleChangeLga}
         className="w-full h-[42px] leading-[42px] bg-white border-b border-[#d0d5dd] outline-0 transition-all duration-500 rounded-none placeholder:text-muted text-black text-[14px] font-normal font-poppins"
       >
         <option value="">--Select L.G.A.--</option>

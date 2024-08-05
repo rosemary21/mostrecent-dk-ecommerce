@@ -48,3 +48,19 @@ export interface InitializeCardPayload {
   email: string;
   amount: number;
 }
+
+export interface AddTransactionProps {
+  productDescriptionCode: string;
+  productCategoryCode: string;
+  productCode: string;
+  productDescription: string;
+  amount: number;
+  currency: string;
+}
+
+export interface AddTransactionPayload {
+  currency: string;
+  userName: string;
+  reference: string;
+  descriptionCodeList: AddTransactionProps[];
+}

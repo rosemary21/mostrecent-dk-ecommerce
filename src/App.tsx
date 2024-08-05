@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes as Router, Route } from "react-router-dom";
+import { Routes as Router, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import FashionMen from "./pages/FashionMen";
 import FashionWomen from "./pages/FashionWomen";
@@ -20,6 +20,7 @@ import HandCrafted from "./pages/HandCrafted";
 import { useIdleTimer } from "react-idle-timer";
 import { logOut } from "./services/api/API";
 import openNotification from "./utils/OpenNotification";
+import TransactionSuccess from "./pages/TransactionSuccess";
 
 function App() {
   const onIdle = async () => {
@@ -63,29 +64,31 @@ function App() {
   });
 
   return (
-    <BrowserRouter>
-      <Router>
-        <Route path="/">
-          <Route index element={<Home />} />
-          <Route path={ROUTES.fashionMen} element={<FashionMen />} />
-          <Route path={ROUTES.fashionWomen} element={<FashionWomen />} />
-          <Route path={ROUTES.fashionKids} element={<FashionKids />} />
-          <Route path={ROUTES.cart} element={<Cart />} />
-          <Route path={ROUTES.aboutUs} element={<About />} />
-          <Route path={ROUTES.allBrands} element={<AllBrands />} />
-          <Route path={ROUTES.artCraft} element={<ArtCraft />} />
-          <Route path={ROUTES.software} element={<Software />} />
-          <Route path={ROUTES.CaseStudy} element={<CaseStudy />} />
-          <Route path={ROUTES.checkout} element={<Checkout />} />
-          <Route path={ROUTES.login} element={<Login />} />
-          <Route path={ROUTES.privacy} element={<PrivacyPolicies />} />
-          <Route path={ROUTES.terms} element={<TermsAndConditions />} />
-          <Route path={ROUTES.contactUs} element={<ContactUs />} />
-          <Route path={ROUTES.wallPainting} element={<WallPainting />} />
-          <Route path={ROUTES.handCrafted} element={<HandCrafted />} />
-        </Route>
-      </Router>
-    </BrowserRouter>
+    <Router>
+      <Route path="/">
+        <Route index element={<Home />} />
+        <Route path={ROUTES.fashionMen} element={<FashionMen />} />
+        <Route path={ROUTES.fashionWomen} element={<FashionWomen />} />
+        <Route path={ROUTES.fashionKids} element={<FashionKids />} />
+        <Route path={ROUTES.cart} element={<Cart />} />
+        <Route path={ROUTES.aboutUs} element={<About />} />
+        <Route path={ROUTES.allBrands} element={<AllBrands />} />
+        <Route path={ROUTES.artCraft} element={<ArtCraft />} />
+        <Route path={ROUTES.software} element={<Software />} />
+        <Route path={ROUTES.CaseStudy} element={<CaseStudy />} />
+        <Route path={ROUTES.checkout} element={<Checkout />} />
+        <Route path={ROUTES.login} element={<Login />} />
+        <Route path={ROUTES.privacy} element={<PrivacyPolicies />} />
+        <Route path={ROUTES.terms} element={<TermsAndConditions />} />
+        <Route path={ROUTES.contactUs} element={<ContactUs />} />
+        <Route path={ROUTES.wallPainting} element={<WallPainting />} />
+        <Route path={ROUTES.handCrafted} element={<HandCrafted />} />
+        <Route
+          path={ROUTES.transactionSuccess}
+          element={<TransactionSuccess />}
+        />
+      </Route>
+    </Router>
   );
 }
 

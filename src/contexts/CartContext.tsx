@@ -13,7 +13,7 @@ import { LoginResponseProps, ProductDescription } from "../types/Response";
 import { ActiveCheckoutAccordion } from "../pages/Checkout";
 
 export interface CartProps {
-  id: number | string;
+  id: number;
   count: number;
 }
 

@@ -18,6 +18,8 @@ export default function Cart() {
   const { clearCart, cartCount, cart, setActiveCheckoutAccordion } =
     useCartContext();
 
+  const descriptionList: ProductDescription[] = [];
+
   const totalAmount = cart.reduce((tot, cartItem) => {
     const item = [...fashionItems, ...artItems].find(
       (item) => item.id === cartItem.id
@@ -32,6 +34,17 @@ export default function Cart() {
       openNotification("warning", "Add item(s) to cart to continue");
       return;
     }
+
+    for (let i = 0; i < cart.length; i++) {
+      const itemID = cart[i].id;
+      const descriptionDto = [...fashionItems, ...artItems].find(
+        (item) => item.id === itemID
+      );
+      if (!descriptionDto) return;
+      descriptionList.push(descriptionDto);
+      setLocalData<ProductDescription[]>("descriptionList", descriptionList);
+    }
+
     // Check if user is logged in
     const userDetails = getLocalData<LoginResponseProps>("user-details");
     if (!userDetails?.token) {
