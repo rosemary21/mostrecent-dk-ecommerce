@@ -1,23 +1,7 @@
-import { useState } from "react";
 import FashionNavbar from "./FashionNavbar";
-import useCountUp from "../../hooks/useCountUp";
 import { motion } from "framer-motion";
 
 export default function FashionMain() {
-  const [showDeliveries, setShowDeliveries] = useState(false);
-  const [showCustomers, setShowCustomers] = useState(false);
-
-  const deliveryCount = useCountUp({
-    duration: 2,
-    end: 3942,
-    onComplete: () => setShowDeliveries(true),
-  });
-  const customerCount = useCountUp({
-    duration: 2,
-    end: 1836,
-    onComplete: () => setShowCustomers(true),
-  });
-
   return (
     <main className="w-screen h-screen">
       <FashionNavbar />
@@ -65,41 +49,6 @@ export default function FashionMain() {
               Search now
             </motion.button>
           </form>
-
-          <div className="w-full flex items-center justify-center gap-7 mt-8">
-            <div className="overflow-hidden">
-              <motion.h1
-                animate={{ opacity: [0, 1], y: ["100%", "0"] }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="font-plusJakartaSans text-[33px] text-white  font-bold text-center"
-              >
-                {deliveryCount}
-              </motion.h1>
-              <motion.p
-                animate={{ opacity: [0, 1], y: ["100%", "0"] }}
-                transition={{ duration: 1, delay: 2 }}
-                className="font-plusJakartaSans text-[16px] text-[#D4D4D8] font-bold text-center"
-              >
-                {showDeliveries && "Order Delivered"}
-              </motion.p>
-            </div>
-            <div className="overflow-hidden">
-              <motion.h1
-                animate={{ opacity: [0, 1], y: ["100%", "0"] }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="font-plusJakartaSans text-[33px] text-white font-bold text-center"
-              >
-                {customerCount}
-              </motion.h1>
-              <motion.p
-                animate={{ opacity: [0, 1], y: ["100%", "0"] }}
-                transition={{ duration: 1, delay: 2 }}
-                className="font-plusJakartaSans text-[16px] text-[#D4D4D8] font-bold text-center"
-              >
-                {showCustomers && "Registered Customers"}
-              </motion.p>
-            </div>
-          </div>
         </div>
       </div>
     </main>

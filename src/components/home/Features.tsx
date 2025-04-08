@@ -4,13 +4,14 @@ import { features } from "../../data/Home";
 export default function Features() {
   return (
     <div className="w-full h-fit py-5 grid md:grid-cols-2 grid-cols-1 gap-4 md:mt-9 mt-5 overflow-hidden">
-      {features.map(({ id, image, subtitle, title }) => (
-        <motion.div
+      {features.map(({ id, image, subtitle, title, link }) => (
+        <motion.a
           initial={{ opacity: 0, y: "100%" }}
           whileInView={{ opacity: 1, y: "0" }}
+          href={link}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="w-full h-fit bg-white rounded-[14px] flex items-start justify-between gap-4 px-4 py-5 transition-all duration-500 hover:bg-[#ddd] hover:border-[#131313] shadow-lg hover:-translate-y-2"
+          className="w-full h-fit bg-white rounded-[14px] flex items-start justify-between gap-4 px-4 py-5 transition-all duration-500 hover:bg-[#ddd] hover:border-[#131313] shadow-lg hover:-translate-y-2 cursor-pointer"
           key={id}
         >
           <img src={image} alt="features icon" />
@@ -22,7 +23,7 @@ export default function Features() {
               {subtitle}
             </p>
           </div>
-        </motion.div>
+        </motion.a>
       ))}
     </div>
   );

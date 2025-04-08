@@ -19,7 +19,7 @@ export const homeNavs = [
   {
     id: 3,
     link: ROUTES.software,
-    text: "Software",
+    text: "Technology",
     path: "software",
   },
   {
@@ -50,6 +50,7 @@ export const features = [
       "Dkeralutive company to offer software services, focus on software solution so as to render service to its client",
     image: FeaturesImage1,
     initial: "-100%",
+    link: "/software",
   },
   {
     id: 2,
@@ -58,6 +59,7 @@ export const features = [
       "Dkeralutive company to offers various fashion products , focus on software solution so as to render service to its client",
     image: FeaturesImage2,
     initial: "100%",
+    link: "/fashion-men",
   },
   {
     id: 3,
@@ -66,6 +68,7 @@ export const features = [
       "Dkeralutive company offers design services,focus on providing high-level design consultation and strategic guidance to clients",
     image: FeaturesImage3,
     initial: "-100%",
+    link: "/fashion-women",
   },
   {
     id: 4,
@@ -74,6 +77,7 @@ export const features = [
       "Dkeralutive company focus in arts and crafts, provides high-quality and bespoke artistic products, as well as specialized creative services",
     image: FeaturesImage1,
     initial: "100%",
+    link: "/art-craft",
   },
 ];
 

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ourServices } from "../../data";
 
 export default function SoftwareServices() {
@@ -10,11 +11,12 @@ export default function SoftwareServices() {
         Below are the services we render...
       </p>
 
-      <div className="mt-12 grid md:grid-cols-3 grid-cols-2 services-group">
+      <div className="mt-12 grid md:grid-cols-2 grid-cols-1">
         {ourServices.map((service) => (
-          <div
+          <Link
             key={service.id}
             className="p-5 flex flex-col items-center border border-[#E4E4E7] gap-[10px]"
+            to={service.link}
           >
             <img
               className="md:w-[49px] w-[35px] md:h-[49px] h-[35px]"
@@ -23,7 +25,7 @@ export default function SoftwareServices() {
             />
             <h2>{service.title}</h2>
             <p>{service.subtitle}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

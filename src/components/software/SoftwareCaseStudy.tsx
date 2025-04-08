@@ -27,26 +27,6 @@ export default function SoftwareCaseStudy() {
           src="/assets/strike-lines.svg"
           alt="StrikeLines"
         />
-
-        <div className="flex items-center gap-6 mt-5">
-          <div>
-            <h2 className="md:text-[36px] text-[23px] font-bold font-plusJakartaSans text-[#18181B]">
-              50k+
-            </h2>
-            <span className="md:text-[16px] text-[13px] font-normal font-plusJakartaSans text-[#71717A]">
-              Artwork
-            </span>
-          </div>
-
-          <div>
-            <h2 className="md:text-[36px] text-[23px] font-bold font-plusJakartaSans text-[#18181B]">
-              17k+
-            </h2>
-            <span className="md:text-[16px] text-[13px] font-normal font-plusJakartaSans text-[#71717A]">
-              Artists
-            </span>
-          </div>
-        </div>
       </div>
 
       <div className="md:w-fit w-full flex items-center gap-5 md:mt-0 mt-5">

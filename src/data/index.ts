@@ -6,6 +6,10 @@ import Category4 from "/assets/category-4.png";
 
 export const dkSuccess = "dkss";
 export const dkError = "dker";
+export const E_COMMERCE_URL = "https://dkerulative.com.ng/";
+export const PROPERTIES_URL = "https://dk-properties.dkerulative.com.ng/";
+export const CONSULT_URL = "https://dk-consult.dkerulative.com.ng/";
+export const LEARN_URL = "https://dk-learn.dkerulative.com.ng/";
 
 export const fashionNavs = [
   {
@@ -75,44 +79,42 @@ export const ourServices = [
   {
     id: 1,
     icon: "/assets/web-design.svg",
-    title: "Branding",
+    title: "E-Commerce",
     subtitle:
-      "Dkeralutive company to offer branding services so as to render service to its client",
+      "Hub for shopping your favourite items online like cloths, shoes, wall arts, etc",
+    link: E_COMMERCE_URL,
   },
   {
     id: 2,
     icon: "/assets/dev-ops.svg",
-    title: "DevOps",
+    title: "Properties",
     subtitle:
-      "Dkeralutive company to offer devops services so as to render service to its client",
+      "Buy properties, land, shortlets and apartments from us. We are the best in the game",
+    link: PROPERTIES_URL,
   },
   {
     id: 3,
     icon: "/assets/ui-ux.svg",
-    title: "UI/UX",
+    title: "Sort",
     subtitle:
-      "Dkeralutive company to offer UI/UX services so as to render service to its client",
+      "The most affordable place to get your recharge cards, airtime, DSTV, and other subscriptions at a go",
+    link: "",
   },
   {
     id: 4,
     icon: "/assets/frontend-dev.svg",
-    title: "Front-End Development",
+    title: "Consultation",
     subtitle:
-      "Dkeralutive company to offer Frontend services so as to render service to its client",
+      "Feel free to consult us for any of your business needs. We are here to help you achieve your goals easily. From IT to business consultations, we got you covered",
+    link: CONSULT_URL,
   },
   {
     id: 5,
     icon: "/assets/backend.svg",
-    title: "Backend",
+    title: "Learning",
     subtitle:
-      "Dkeralutive company to offer Backend services so as to render service to its client",
-  },
-  {
-    id: 6,
-    icon: "/assets/cms.svg",
-    title: "CMS",
-    subtitle:
-      "Dkeralutive company to offer CMS services so as to render service to its client",
+      "Dkeralutive Learn is the best online learning platform to learn anything you want. We have the best tutors and the best courses for you",
+    link: LEARN_URL,
   },
 ];
 

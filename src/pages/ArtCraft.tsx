@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ArtCraftMain from "../components/artCraft/ArtCraftMain";
 import { GetProductDescriptionPayload } from "../types/Payload";
 import { useQuery } from "@tanstack/react-query";
 import { getProductsByDescription } from "../services/api/API";
@@ -9,6 +8,7 @@ import ArtCraftCategories from "../components/artCraft/ArtCraftCategories";
 import ArtCraftSales from "../components/artCraft/ArtCraftSales";
 import Footer from "../components/general/Footer";
 import { Spin } from "antd";
+import ArtCraftNavbar from "../components/artCraft/ArtCraftNavbar";
 
 export default function ArtCraft() {
   const [pageNo, setPageNo] = useState(0);
@@ -30,7 +30,7 @@ export default function ArtCraft() {
     );
   return (
     <>
-      <ArtCraftMain />
+      <ArtCraftNavbar />
       <ArtCraftCategories />
       <Spin spinning={isLoading}>
         <ArtCraftSales

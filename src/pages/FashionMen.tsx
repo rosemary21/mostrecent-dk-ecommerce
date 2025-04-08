@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import FashionCategories from "../components/fashion/FashionCategories";
-import FashionMain from "../components/fashion/FashionMain";
 import { getProductsByDescription } from "../services/api/API";
 import { GetProductDescriptionPayload } from "../types/Payload";
 import { useState } from "react";
@@ -9,6 +8,7 @@ import { setLocalData } from "../utils/localData";
 import { ProductDescription } from "../types/Response";
 import Footer from "../components/general/Footer";
 import { Spin } from "antd";
+import FashionNavbar from "../components/fashion/FashionNavbar";
 
 export default function FashionMen() {
   const [pageNo, setPageNo] = useState(0);
@@ -31,9 +31,10 @@ export default function FashionMen() {
     );
 
   return (
-    <div>
-      <FashionMain />
-      <FashionCategories />
+    <>
+      {/* <FashionMain /> */}
+      <FashionNavbar />
+      <FashionCategories category="men" />
       <Spin spinning={isLoading}>
         <FashionSales
           products={products}
@@ -42,6 +43,6 @@ export default function FashionMen() {
         />
       </Spin>
       <Footer />
-    </div>
+    </>
   );
 }

@@ -121,15 +121,16 @@ export default function ContactRight() {
               htmlFor="message"
               className="text-[13px] font-plusJakartaSans font-semibold text-black"
             >
-              Message
+              Reason for contacting
             </label>
+
             <textarea
-              placeholder="Enter message"
+              placeholder="Enter your reason for contacting us"
               name="message"
               id="message"
               value={values.message}
               onChange={handleChange}
-              title="Enter your message"
+              title="Enter your reason for contacting us"
               className="w-full bg-white p-3 border border-[#d0d5dd] outline-0 transition-all duration-500 rounded-[8px] placeholder:text-slate-500 text-black text-[14px] font-normal font-poppins resize-none"
               rows={5}
             />

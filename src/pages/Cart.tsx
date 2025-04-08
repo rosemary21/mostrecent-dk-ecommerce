@@ -102,14 +102,12 @@ export default function Cart() {
           )}
         </div>
 
-        {cart?.length > 0 && (
-          <button
-            onClick={clearCart}
-            className="w-1/2 h-[45px] mx-auto bg-primary text-white outline-0 border-0 mt-5 flex items-center justify-center text-[13px] font-medium"
-          >
-            CLEAR CART
-          </button>
-        )}
+        <button
+          className="w-full mt-5 h-[40px] text-center text-white bg-primary outline-0 border-0 text-[14px] uppercase font-poppins font-medium"
+          onClick={routeToCheckOut}
+        >
+          continue
+        </button>
       </div>
 
       <div className="md:w-3/5 w-[95%] my-[30px] mx-auto bg-[#F8FAFC] md:py-[18px] py-[12px] md:px-[30px] px-[19px] flex flex-col gap-5">
@@ -127,12 +125,14 @@ export default function Cart() {
           </p>
         </div>
 
-        <button
-          className="w-full h-[40px] text-center text-white bg-primary outline-0 border-0 text-[14px] uppercase font-poppins font-medium"
-          onClick={routeToCheckOut}
-        >
-          continue
-        </button>
+        {cart?.length > 0 && (
+          <button
+            onClick={clearCart}
+            className="w-1/2 h-[45px] mx-auto bg-primary text-white outline-0 border-0 mt-5 flex items-center justify-center text-[13px] font-medium"
+          >
+            CLEAR CART
+          </button>
+        )}
       </div>
       <Footer />
     </>
